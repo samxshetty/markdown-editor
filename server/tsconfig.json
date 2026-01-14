@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "es2020",
+    "module": "commonjs",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "lib": ["ES2022"],
+    "types" : ["node", "jest"],
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "files": [
+    "src/tests/server.test.ts"
+  ],
+  "include": ["src/**/*", "prisma/**/*"],
+  "exclude": ["node_modules", "**/*.test.ts"]
+}

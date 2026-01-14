@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  /* 
+     Explicitly styling the markdown preview content to ensure it renders correctly
+     regardless of the prose plugin's state or specificity issues.
+     This acts as a guaranteed fallback/override.
+  */
+  .markdown-preview h1 {
+    @apply text-3xl font-bold mb-4 mt-6 text-slate-900 border-b pb-2;
+  }
+  .markdown-preview h2 {
+    @apply text-2xl font-semibold mb-3 mt-5 text-slate-800;
+  }
+  .markdown-preview h3 {
+    @apply text-xl font-semibold mb-2 mt-4 text-slate-800;
+  }
+  .markdown-preview h4 {
+    @apply text-lg font-semibold mb-2 mt-4 text-slate-800;
+  }
+  .markdown-preview p {
+    @apply mb-4 leading-relaxed text-slate-700;
+  }
+  .markdown-preview ul {
+    @apply list-disc list-outside ml-6 mb-4 text-slate-700;
+  }
+  .markdown-preview ol {
+    @apply list-decimal list-outside ml-6 mb-4 text-slate-700;
+  }
+  .markdown-preview li {
+    @apply mb-1;
+  }
+  .markdown-preview a {
+    @apply text-blue-600 hover:underline;
+  }
+  .markdown-preview blockquote {
+    @apply border-l-4 border-slate-300 pl-4 italic my-4 text-slate-600;
+  }
+  .markdown-preview code {
+    @apply bg-slate-100 rounded px-1.5 py-0.5 font-mono text-sm text-pink-600;
+  }
+  .markdown-preview pre {
+    @apply bg-slate-800 rounded p-4 mb-4 overflow-x-auto;
+  }
+  .markdown-preview pre code {
+    @apply bg-transparent text-white p-0 text-sm;
+  }
+  .markdown-preview hr {
+    @apply my-8 border-slate-200;
+  }
+  .markdown-preview strong {
+    @apply font-bold text-slate-900;
+  }
+  .markdown-preview em {
+    @apply italic;
+  }
+  .markdown-preview table {
+    @apply w-full border-collapse mb-4 text-left;
+  }
+  .markdown-preview th {
+    @apply border-b-2 border-slate-200 p-2 font-semibold text-slate-700;
+  }
+  .markdown-preview td {
+    @apply border-b border-slate-100 p-2 text-slate-600;
+  }
+}
