@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-// Backend is running on port 3001 with /api prefix
-const API_URL = 'http://localhost:3000/api';
+// Backend is running on port 3000 with /api prefix
+const API_URL = import.meta.env.VITE_APP_API_URL || 'http://localhost:3000/api';
 
 export interface Document {
   id: number;
@@ -38,4 +38,9 @@ export const updateDocument = async (id: number, markdownContent: string): Promi
 export const getDocument = async (id: string): Promise<Document> => {
   const response = await axios.get<Document>(`${API_URL}/documents/${id}`);
   return response.data;
+};
+
+export const deleteDocument = async (id: number): Promise<any> => {
+    const response = await axios.delete(`${API_URL}/documents/${id}`);
+    return response.data;
 };
