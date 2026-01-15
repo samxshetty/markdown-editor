@@ -142,3 +142,24 @@ export const updateDocument = async (req: Request<{ id: string }>, res: Response
     res.status(500).json({ error: 'Internal server error' });
   }
 };
+
+export const deleteDocument = async (req: Request<{ id: string }>, res: Response) => {
+  const { id } = req.params;
+
+  if (!id) {
+    return res.status(400).json({ error: 'Document ID is required' });
+  }
+
+  try {
+    await prisma.document.delete({
+      where: {
+        id: parseInt(id, 10),
+      },
+    });
+
+    res.status(204).send();
+  } catch (error) {
+    console.error(`Error deleting document with ID ${id}:`, error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
