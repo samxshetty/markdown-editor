@@ -28,9 +28,20 @@ if [ "$(docker ps -q -a -f name=$DB_CONTAINER_NAME)" ]; then
   exit 0
 fi
 
-# import env variables from .env
+# Choose env file (default: .env.local)
+ENV_FILE=${ENV_FILE:-.env}
+
+if [ ! -f "$ENV_FILE" ]; then
+  echo "Env file '$ENV_FILE' not found"
+  exit 1
+fi
+
+echo "Using env file: $ENV_FILE"
+
 set -a
-source .env
+source "$ENV_FILE"
+set +a
+
 
 DB_PASSWORD=$(echo "$DATABASE_URL" | awk -F':' '{print $3}' | awk -F'@' '{print $1}')
 DB_PORT=$(echo "$DATABASE_URL" | awk -F':' '{print $4}' | awk -F'\/' '{print $1}')

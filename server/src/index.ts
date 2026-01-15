@@ -4,7 +4,12 @@ import dotenv from 'dotenv';
 import './test-env-loading'; // Test env loading immediately
 import documentRoutes from './routes/documentRoutes';
 
-dotenv.config();
+const envFile =
+  process.env.NODE_ENV === "docker"
+    ? ".env.docker"
+    : ".env.local";
+
+dotenv.config({ path: envFile });
 
 const app = express();
 const port = process.env.PORT || 3001;
