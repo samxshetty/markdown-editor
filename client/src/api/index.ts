@@ -39,3 +39,8 @@ export const getDocument = async (id: string): Promise<Document> => {
   const response = await axios.get<Document>(`${API_URL}/documents/${id}`);
   return response.data;
 };
+
+export const deleteDocument = async (id: number): Promise<any> => {
+    const response = await axios.delete(`${API_URL}/documents/${id}`);
+    return response.data;
+};
