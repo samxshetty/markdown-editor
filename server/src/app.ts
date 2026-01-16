@@ -11,7 +11,7 @@ app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
 
-app.use('/documents', documentRoutes);
+app.use('/api/documents', documentRoutes);
 
 //Change status code to 404 for test to fail
 app.get('/health', (req, res) => {
