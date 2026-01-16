@@ -7,7 +7,3 @@ dist
 
 /src/generated/prisma
 src/generated
-
-migrations
-
-Dockerfile

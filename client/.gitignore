@@ -6,6 +6,3 @@ dist
 
 /src/generated/prisma
 src/generated
-
-Dockerfile
-.dockerignore
