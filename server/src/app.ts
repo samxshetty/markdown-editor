@@ -13,8 +13,9 @@ app.use(express.json());
 
 app.use('/documents', documentRoutes);
 
+//Change status code to 404 for test to fail
 app.get('/health', (req, res) => {
-  res.json({ status: 'ok' });
+  res.status(200).json({ status: 'ok' });
 });
 
 export default app;

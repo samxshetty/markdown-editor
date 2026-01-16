@@ -2,7 +2,7 @@ import request from 'supertest';
 import app from '../app';
 
 // Mock the prisma client
-jest.mock('../src/db/prisma', () => ({
+jest.mock('../db/prisma', () => ({
   __esModule: true,
   default: {
     document: {
