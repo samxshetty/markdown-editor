@@ -1,0 +1,59 @@
+# Specifies the Docker Compose file format version.
+version: "3.8"
+
+# Defines the different services (containers) that make up the application.
+services:
+  # The PostgreSQL database service.
+  db:
+    image: postgres:18-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: pern_app
+    volumes:
+      # Mounts a named volume to persist database data across container restarts.
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      # Maps the container's port 5432 to the host's port 5432 for direct DB access.
+      - "5432:5432"
+    healthcheck:
+      # Checks if the database is ready to accept connections before other services start.
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # The backend server service.
+  server:
+    # Builds the Docker image from the './server' directory.
+    build: ./server
+    ports:
+      # Maps the container's port 3000 to the host's port 3000.
+      - "3000:3000"
+    environment:
+      # The database URL uses the service name 'db' as the hostname, which is resolved by Docker's internal DNS.
+      DATABASE_URL: postgresql://postgres:password@db:5432/pern_app
+      NODE_ENV: docker
+    depends_on:
+      # Ensures the 'server' service starts only after the 'db' service is healthy.
+      db:
+        condition: service_healthy
+
+  # The frontend client service.
+  client:
+    # Builds the Docker image from the './client' directory.
+    build: ./client
+    environment:
+      # The client-side code will make API calls to this URL.
+      # 'localhost' refers to the host machine from the browser's perspective.
+      VITE_API_BASE_URL: http://localhost:3000/api
+    ports:
+      # Maps the Nginx server's port 80 inside the container to the host's port 5173.
+      - "5173:80"
+    depends_on:
+      # Ensures the 'client' starts after the 'server' is up.
+      - server
+
+# Defines the named volume for data persistence.
+volumes:
+  postgres_data:

@@ -1,0 +1,11 @@
+﻿{
+  "agentId": 4,
+  "agentName": "SAMRIDH-PC",
+  "poolId": 1,
+  "poolName": "Default",
+  "serverUrl": "https://pipelinesghubeus10.actions.githubusercontent.com/cUPVD5hXHwD7XDnRSp16cpvGr8qJEo0IEDVUDpLdeoXXelCCOh/",
+  "gitHubUrl": "https://github.com/samxshetty/markdown-editor",
+  "workFolder": "_work",
+  "useV2Flow": true,
+  "serverUrlV2": "https://broker.actions.githubusercontent.com/"
+}

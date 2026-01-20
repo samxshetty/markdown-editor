@@ -1,0 +1,15 @@
+# Dependency directory
+node_modules
+
+# Build output
+dist
+build
+
+# Local environment variables
+.env
+
+# Log files
+*.log
+
+# Git directory
+.git
