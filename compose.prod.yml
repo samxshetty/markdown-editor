@@ -52,7 +52,7 @@ services:
       # Maps the Nginx server's port 80 inside the container to the host's port 5173.
       - "5173:80"
     depends_on:
-      # Ensures the 'client' starts after the 'server' is up.
+      # Ensures the 'client' starts after the 'server' is up
       - server
 
 # Defines the named volume for data persistence
