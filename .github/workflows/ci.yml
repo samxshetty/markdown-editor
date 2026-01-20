@@ -1,0 +1,46 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. Checkout the code from the repository
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    # 2. Run Tests (Server)
+    - name: Run Server Tests
+      run: |
+        cd server
+        npm install
+        npm test
+
+    # 3. Login to Docker Hub
+    - name: Login to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    # 4. Build and Push Server Image
+    - name: Build and Push Server
+      uses: docker/build-push-action@v4
+      with:
+        context: ./server
+        push: true
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/mern-server:latest
+
+    # 5. Build and Push Client Image
+    - name: Build and Push Client
+      uses: docker/build-push-action@v4
+      with:
+        context: ./client
+        push: true
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/mern-client:latest
