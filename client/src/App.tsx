@@ -8,7 +8,7 @@ import { Toaster, toast } from 'react-hot-toast';
 function App() {
   const [isMyDocumentsModalOpen, setIsMyDocumentsModalOpen] = useState(false);
   const [isSaveModalOpen, setIsSaveModalOpen] = useState(false);
-  const [markdown, setMarkdown] = useState('# Hello World\n\nStart typing markdown...');
+  const [markdown, setMarkdown] = useState('# Welcome to the future of deployment!\n\nStart typing markdown...');
   const [currentDoc, setCurrentDoc] = useState<Document | null>(null);
 
   const handleSave = async () => {

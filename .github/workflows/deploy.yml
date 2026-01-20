@@ -1,0 +1,39 @@
+name: CD Pipeline
+
+on:
+  workflow_run:
+    workflows: ["CI Pipeline"]
+    types:
+      - completed
+
+jobs:
+  deploy:
+    # This 'if' condition is crucial. It ensures that the deployment job
+    # only runs if the CI Pipeline workflow was successful.
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    # This specifies that the job must run on a runner that has all these labels.
+    # This is how we target the self-hosted runner we configured earlier.
+    runs-on: [self-hosted, Windows, X64]
+
+    steps:
+      # Step 1: Check out the repository code onto the runner.
+      # This is necessary to get the compose.prod.yml file.
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Pull the latest images from Docker Hub.
+      # Docker Compose will check the remote registry and download any new image versions.
+      - name: Pull prod images
+        run: |
+          docker-compose -f compose.prod.yml pull
+
+      # Step 3: Stop the running containers and start them again with the new images.
+      # The '-d' flag runs the containers in detached mode.
+      - name: Deploy prod
+        run: |
+          docker-compose -f compose.prod.yml up -d
+
+      # Step 4 (Optional but recommended): Clean up old, unused Docker images
+      # to save disk space on the server.
+      - name: Prune Old Images
+        run: docker image prune -f
