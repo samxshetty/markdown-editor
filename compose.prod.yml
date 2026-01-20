@@ -27,7 +27,7 @@ services:
   server:
     # This is the key difference: we use the 'image' directive to specify the image
     # to pull from Docker Hub, including our username.
-    image: <your-dockerhub-username>/mern-server:latest
+    image: samxshetty/mern-server:latest
     ports:
       # Maps the container's port 3000 to the host's port 3000.
       - "3000:3000"
@@ -43,7 +43,7 @@ services:
   # The frontend client service.
   client:
     # Similarly, we pull the client image from Docker Hub.
-    image: <your-dockerhub-username>/mern-client:latest
+    image: samxshetty/mern-client:latest
     environment:
       # The client-side code will make API calls to this URL.
       # 'localhost' refers to the host machine from the browser's perspective.
