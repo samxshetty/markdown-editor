@@ -1,0 +1,12 @@
+﻿{
+  "repositoryName": "samxshetty/markdown-editor",
+  "pipelineDirectory": "markdown-editor",
+  "workspaceDirectory": "markdown-editor\\markdown-editor",
+  "repositories": {
+    "samxshetty/markdown-editor": {
+      "repositoryPath": "markdown-editor\\markdown-editor",
+      "lastRunOn": "01/20/2026 22:10:40 +05:30"
+    }
+  },
+  "lastRunOn": "01/20/2026 22:10:40 +05:30"
+}
