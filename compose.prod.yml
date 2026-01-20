@@ -55,6 +55,6 @@ services:
       # Ensures the 'client' starts after the 'server' is up.
       - server
 
-# Defines the named volume for data persistence.
+# Defines the named volume for data persistence
 volumes:
   postgres_data:
